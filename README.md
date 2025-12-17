@@ -11,7 +11,7 @@ Ersten Teile von Scripts vom Verzeichnis sql_scripts ausführen
 
 Datensatz downloaden:
 https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data?resource=download&select=yellow_tripdata_2015-01.csv
-z.B. yellow_tripdate_2015-01.csv
+z.B. yellow_tripdate_2015-01.csv und im Verzeichnis data speichern
 
 Daten in Postgres container kopieren + csv Daten einlesen:
 docker cp .\data\yellow_tripdata_2015-01.csv postgres-demo:/tmp/taxi.csv
