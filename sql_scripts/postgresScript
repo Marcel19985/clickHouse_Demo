@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS taxi_trips (
+    vendorid int,
+    tpep_pickup_datetime timestamp,
+    tpep_dropoff_datetime timestamp,
+    passenger_count int,
+    trip_distance numeric,
+    pickup_longitude numeric,
+    pickup_latitude numeric,
+    ratecodeid int,
+    store_and_fwd_flag text,
+    dropoff_longitude numeric,
+    dropoff_latitude numeric,
+    payment_type int,
+    fare_amount numeric,
+    extra numeric,
+    mta_tax numeric,
+    tip_amount numeric,
+    tolls_amount numeric,
+    improvement_surcharge numeric,
+    total_amount numeric
+);
+
+SELECT count(*) FROM taxi_trips;
+
+SELECT vendorid, ratecodeid, count(*) AS trips
+FROM taxi_trips
+GROUP BY vendorid, ratecodeid
+ORDER BY trips DESC
+LIMIT 10;
