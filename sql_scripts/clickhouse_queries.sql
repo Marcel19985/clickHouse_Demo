@@ -3,6 +3,13 @@
 SELECT count() FROM demo.taxi_trips;
 
 ------------------------------------------------
+--Showcase internen Ablauf
+EXPLAIN
+SELECT count()
+FROM demo.taxi_trips;
+
+
+------------------------------------------------
 -- Top Vendor/RateCode
 SELECT VendorID, RateCodeID, count() AS trips
 FROM demo.taxi_trips
@@ -35,3 +42,11 @@ SELECT
     quantile(0.90)(trip_distance) AS p90,
     quantile(0.99)(trip_distance) AS p99
 FROM demo.taxi_trips;
+
+------------------------------------------------
+--Query mit Where und Zeitfilter (für die order by / sortierung der merge Tree engine)
+SELECT VendorID, count() AS trips
+FROM demo.taxi_trips
+WHERE tpep_pickup_datetime >= '2015-01-01'
+  AND tpep_pickup_datetime < '2015-01-08'
+GROUP BY VendorID;

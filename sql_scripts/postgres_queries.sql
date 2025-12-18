@@ -35,3 +35,10 @@ SELECT
   percentile_cont(0.90) WITHIN GROUP (ORDER BY trip_distance) AS p90,
     percentile_cont(0.99) WITHIN GROUP (ORDER BY trip_distance) AS p99
 FROM taxi_trips;
+
+--------------------------------------------------------------
+--Query mit Where und Zeitfilter (für die order by / sortierung der merge Tree engine)
+SELECT vendorid, count(*) AS trips
+FROM taxi_trips
+WHERE tpep_pickup_datetime BETWEEN '2015-01-01' AND '2015-01-07'
+GROUP BY vendorid;
