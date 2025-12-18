@@ -34,3 +34,29 @@ FROM demo.taxi_trips
 GROUP BY VendorID, RateCodeID
 ORDER BY trips DESC
 LIMIT 10;
+
+
+#trips pro Tag (großer Scan einfache Ausgabe)
+SELECT toDate(tpep_pickup_datetime) AS day,
+       count() AS trips
+FROM demo.taxi_trips
+GROUP BY day
+ORDER BY day;
+
+#Umsatz pro Vendor(Sum + Avg)
+SELECT VendorID,
+       count() AS trips,
+       sum(total_amount) AS revenue,
+       avg(total_amount) AS avg_total
+FROM demo.taxi_trips
+GROUP BY VendorID
+ORDER BY revenue DESC;
+
+#percentiles von trip_distance "Analytics Query" (hier wird gezeigt
+#das Clickhouse stark eingebaute Aggregate für Quantile/Percentiles hat)
+SELECT
+  quantile(0.50)(trip_distance) AS p50,
+  quantile(0.90)(trip_distance) AS p90,
+  quantile(0.99)(trip_distance) AS p99
+FROM demo.taxi_trips;
+
